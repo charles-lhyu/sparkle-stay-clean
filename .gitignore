@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# customer comment photo uploads
+/public/uploads/comments/*
+!/public/uploads/comments/.gitkeep

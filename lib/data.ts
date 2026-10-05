@@ -1,3 +1,7 @@
+import jobsJson from "@/data/jobs.json";
+
+export const jobs = jobsJson;
+
 export const services = [
   {
     slug: "bnb",
@@ -46,53 +50,6 @@ export const services = [
   },
 ];
 
-export const jobs = [
-  {
-    id: "JR-2418",
-    title: "12-room boutique hotel, weekend cover",
-    service: "Hotel",
-    location: "City centre",
-    date: "Sep 2026",
-    quote:
-      "They covered a short-notice Saturday when two attendants called off. Every departure room was guest-ready before 2pm.",
-    client: "Front office manager",
-    outcome: "12 departures + 8 stayovers completed; signed job sheet on file.",
-  },
-  {
-    id: "JR-2391",
-    title: "Superhost turnover — 3-bed townhouse",
-    service: "BnB",
-    location: "Riverside",
-    date: "Aug 2026",
-    quote:
-      "Same-day changeover between 11am checkout and 3pm check-in. Guests mentioned the smell of clean linen in the review.",
-    client: "Airbnb Superhost",
-    outcome: "Turnover in 3h 20m; photo report sent to host.",
-  },
-  {
-    id: "JR-2364",
-    title: "End of tenancy, 2-bed flat",
-    service: "Move-out",
-    location: "North quarter",
-    date: "Jul 2026",
-    quote:
-      "Agent reused our checklist as the inventory addendum. Deposit returned in full.",
-    client: "Letting agent",
-    outcome: "Full inventory clean + oven; reference photos attached.",
-  },
-  {
-    id: "JR-2310",
-    title: "Aparthotel deep clean, 24 keys",
-    service: "Hotel",
-    location: "Business district",
-    date: "Jun 2026",
-    quote:
-      "Quarterly deep clean of kitchens and upholstery. Standard stayed consistent across all units.",
-    client: "Ops lead",
-    outcome: "24 units over 3 nights; no guest complaints the following week.",
-  },
-];
-
 export const reviews = [
   {
     id: "r1",
@@ -125,29 +82,5 @@ export const reviews = [
     rating: 5,
     service: "BnB",
     text: "They message on WhatsApp when a checkout runs late and still protect the next guest's arrival time. That reliability is the product.",
-  },
-];
-
-export const forumSeed = [
-  {
-    id: "c1",
-    author: "Host circle",
-    jobRef: "JR-2391",
-    body: "Anyone used them for midweek Airbnbs? We need linen + towel swap only on Tuesdays.",
-    createdAt: "2026-09-12T10:00:00.000Z",
-  },
-  {
-    id: "c2",
-    author: "Sparkle Stay Clean",
-    jobRef: "team",
-    body: "Yes — we run linen-only midweek slots. Send the listing address and usual checkout time via the inquiry form or WhatsApp and we'll lock a recurring window.",
-    createdAt: "2026-09-12T11:20:00.000Z",
-  },
-  {
-    id: "c3",
-    author: "North agents",
-    jobRef: "JR-2364",
-    body: "Move-out photos were labelled room-by-room. Easy to attach to the checkout report.",
-    createdAt: "2026-08-02T16:40:00.000Z",
   },
 ];

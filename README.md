@@ -20,4 +20,4 @@ Copy `.env.example` to `.env.local` and set:
 
 Replace placeholder phone, email, and sample job references in `lib/contact.ts` and `lib/data.ts`.
 
-Inquiry submissions are logged by `app/api/inquiry/route.ts` (ready to plug into email or a CRM). Forum comments on this demo are stored in the visitor’s browser.
+Inquiry submissions are logged by `app/api/inquiry/route.ts`. Forum comments are stored in `data/comments.json` after the job reference is checked against `data/jobs.json`. Photos are saved under `public/uploads/comments`.

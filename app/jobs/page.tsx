@@ -10,8 +10,8 @@ export default function JobsPage() {
       <p className="text-sm tracking-[0.18em] text-[var(--teal)] uppercase">Proof of work</p>
       <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl sm:text-5xl">Job references</h1>
       <p className="mt-4 max-w-2xl text-[var(--muted)]">
-        Each completed visit is logged with a reference (JR-xxxx), property type, and outcome. Hosts and
-        agents can quote the number in reviews or on the forum.
+        Each completed visit is logged in the job record database with a reference (JR-xxxx). Comments on
+        the forum are accepted only when that reference matches a real job.
       </p>
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {jobs.map((job) => (
