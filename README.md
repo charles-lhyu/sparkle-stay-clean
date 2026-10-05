@@ -11,6 +11,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## GitHub Pages preview
+
+A static preview deploys from GitHub Actions to:
+
+https://charles-lhyu.github.io/sparkle-stay-clean/
+
+GitHub Pages cannot run the comment/inquiry APIs. Browsing services, jobs, and reviews works; posting comments and the on-site inquiry save need `npm run dev` (or a Node host such as Vercel).
+
+The repository must be public, or your GitHub plan must include Pages for private repos. In the repo: **Settings → Pages → Source: GitHub Actions**.
+
 ## Connect WhatsApp and Messenger
 
 Copy `.env.example` to `.env.local` and set:

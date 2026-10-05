@@ -2,6 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { inquiryWhatsappText, messengerUrl, whatsappUrl } from "@/lib/contact";
+import { withBase } from "@/lib/site";
 
 const services = [
   "BnB / short-stay",
@@ -69,7 +70,7 @@ export function InquiryForm() {
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
 
     try {
-      const res = await fetch("/api/inquiry", {
+      const res = await fetch(withBase("/api/inquiry"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

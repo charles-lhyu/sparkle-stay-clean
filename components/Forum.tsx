@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { withBase } from "@/lib/site";
 
 type Comment = {
   id: string;
@@ -30,7 +31,7 @@ export function Forum({ initialComments }: { initialComments: Comment[] }) {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/comments")
+    fetch(withBase("/api/comments"))
       .then(async (res) => {
         if (!res.ok) throw new Error("load failed");
         return res.json() as Promise<{ comments?: Comment[] }>;
@@ -106,7 +107,7 @@ export function Forum({ initialComments }: { initialComments: Comment[] }) {
     setBusy(true);
     setError("");
     try {
-      const res = await fetch("/api/comments", { method: "POST", body: payload });
+      const res = await fetch(withBase("/api/comments"), { method: "POST", body: payload });
       const data = (await res.json()) as { comment?: Comment; error?: string };
       if (!res.ok || !data.comment) {
         setError(data.error ?? "Could not post this comment.");

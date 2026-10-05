@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { messengerUrl, whatsappUrl } from "@/lib/contact";
 
@@ -33,12 +34,12 @@ export function ChatWidget() {
             >
               Continue on Messenger
             </a>
-            <a
+            <Link
               href="/inquiry"
               className="rounded-full border border-[var(--line)] px-4 py-2.5 text-center text-sm font-medium text-[var(--ink)]"
             >
               Send an inquiry on the site
-            </a>
+            </Link>
           </div>
         </div>
       ) : null}
