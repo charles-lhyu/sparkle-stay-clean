@@ -1,17 +1,9 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { jobs as contentJobs } from "@/content/jobs";
+import type { JobRecord } from "@/content/types";
 
-export type JobRecord = {
-  id: string;
-  status: string;
-  title: string;
-  service: string;
-  location: string;
-  date: string;
-  quote: string;
-  client: string;
-  outcome: string;
-};
+export type { JobRecord };
 
 export type CommentRecord = {
   id: string;
@@ -23,7 +15,6 @@ export type CommentRecord = {
 };
 
 const dataDir = path.join(process.cwd(), "data");
-const jobsFile = path.join(dataDir, "jobs.json");
 const commentsFile = path.join(dataDir, "comments.json");
 export const uploadsDir = path.join(process.cwd(), "public", "uploads", "comments");
 
@@ -43,8 +34,9 @@ async function readJson<T>(file: string, fallback: T): Promise<T> {
   }
 }
 
-export async function listJobs() {
-  return readJson<JobRecord[]>(jobsFile, []);
+/** Job references come from content/jobs.ts (easy to edit with other marketing copy). */
+export async function listJobs(): Promise<JobRecord[]> {
+  return contentJobs;
 }
 
 export async function findJob(rawRef: string) {

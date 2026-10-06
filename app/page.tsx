@@ -1,45 +1,42 @@
 import Link from "next/link";
-import { jobs, reviews, services } from "@/lib/data";
-import { company } from "@/lib/contact";
+import { company, jobs, pages, reviews, services } from "@/content";
 
 export default function Home() {
+  const copy = pages.home;
+  const responseNote = copy.responseNote.replace("{hours}", company.hours);
+
   return (
     <main>
       <section className="hero-grid">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:py-24">
           <div>
-            <p className="text-sm tracking-[0.18em] text-[var(--teal)] uppercase">Hospitality cleaning</p>
+            <p className="text-sm tracking-[0.18em] text-[var(--teal)] uppercase">{copy.eyebrow}</p>
             <h1 className="mt-3 max-w-xl font-[family-name:var(--font-display)] text-5xl leading-[1.1] text-[var(--ink)] sm:text-6xl">
               {company.tagline}
             </h1>
-            <p className="mt-5 max-w-lg text-lg leading-8 text-[var(--muted)]">
-              Sparkle Stay Clean turns over BnBs, hotels, and empty homes to a guest-ready standard —
-              with job references, photo packs, and a coordinator on WhatsApp or Messenger.
-            </p>
+            <p className="mt-5 max-w-lg text-lg leading-8 text-[var(--muted)]">{copy.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/inquiry" className="btn-primary">
-                Request a quote
+              <Link href={copy.primaryCta.href} className="btn-primary">
+                {copy.primaryCta.label}
               </Link>
-              <Link href="/services" className="btn-ghost">
-                See services
+              <Link href={copy.secondaryCta.href} className="btn-ghost">
+                {copy.secondaryCta.label}
               </Link>
             </div>
           </div>
           <aside className="rounded-3xl border border-[var(--line)] bg-white/80 p-6 shadow-[0_20px_60px_rgba(28,49,43,0.08)]">
-            <p className="text-sm text-[var(--muted)]">Typical response</p>
-            <p className="font-[family-name:var(--font-display)] text-4xl text-[var(--teal)]">under 15 min</p>
-            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-              Chat during {company.hours}. Same-day BnB changeovers subject to route.
+            <p className="text-sm text-[var(--muted)]">{copy.responseLabel}</p>
+            <p className="font-[family-name:var(--font-display)] text-4xl text-[var(--teal)]">
+              {copy.responseValue}
             </p>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{responseNote}</p>
             <ul className="mt-6 space-y-3 text-sm">
-              {["Named job reference on every visit", "Linen & amenity reset for hosts", "Inventory photos for move-outs"].map(
-                (item) => (
-                  <li key={item} className="flex gap-2">
-                    <span className="text-[var(--gold)]">◆</span>
-                    {item}
-                  </li>
-                ),
-              )}
+              {copy.highlights.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="text-[var(--gold)]">◆</span>
+                  {item}
+                </li>
+              ))}
             </ul>
           </aside>
         </div>
@@ -47,9 +44,9 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-[family-name:var(--font-display)] text-3xl">Services</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl">{copy.servicesHeading}</h2>
           <Link href="/services" className="text-sm text-[var(--teal)]">
-            Full details
+            {copy.servicesLink}
           </Link>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
@@ -70,9 +67,9 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-[family-name:var(--font-display)] text-3xl">From the job book</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl">{copy.jobsHeading}</h2>
           <Link href="/jobs" className="text-sm text-[var(--teal)]">
-            All references
+            {copy.jobsLink}
           </Link>
         </div>
         <div className="grid gap-5 md:grid-cols-2">
@@ -92,7 +89,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
-        <h2 className="mb-8 font-[family-name:var(--font-display)] text-3xl">Host & hotel comments</h2>
+        <h2 className="mb-8 font-[family-name:var(--font-display)] text-3xl">{copy.reviewsHeading}</h2>
         <div className="grid gap-5 md:grid-cols-3">
           {reviews.slice(0, 3).map((r) => (
             <blockquote key={r.id} className="rounded-3xl border border-[var(--line)] bg-white p-6">

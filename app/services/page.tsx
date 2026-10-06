@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { services } from "@/lib/data";
+import { pages, services } from "@/content";
 
 export const metadata: Metadata = { title: "Services" };
 
 export default function ServicesPage() {
+  const copy = pages.services;
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <p className="text-sm tracking-[0.18em] text-[var(--teal)] uppercase">What we clean</p>
-      <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl sm:text-5xl">
-        BnB, hotel, and move-out
-      </h1>
-      <p className="mt-4 max-w-2xl text-[var(--muted)]">
-        One team for guest changeovers, room attendants, and empty-property cleans. Every visit gets a job
-        reference you can file with the host, GM, or letting agent.
-      </p>
+      <p className="text-sm tracking-[0.18em] text-[var(--teal)] uppercase">{copy.eyebrow}</p>
+      <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl sm:text-5xl">{copy.title}</h1>
+      <p className="mt-4 max-w-2xl text-[var(--muted)]">{copy.description}</p>
       <div className="mt-12 space-y-8">
         {services.map((s) => (
           <article
@@ -28,7 +25,7 @@ export default function ServicesPage() {
               <p className="mt-3 text-[var(--muted)]">{s.summary}</p>
               <p className="mt-4 font-medium text-[var(--teal)]">{s.priceFrom}</p>
               <Link href="/inquiry" className="btn-primary mt-6">
-                Inquire about this service
+                {copy.inquireLabel}
               </Link>
             </div>
             <ul className="space-y-3 text-sm leading-6 text-[var(--muted)]">

@@ -11,6 +11,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Edit site copy
+
+Marketing and info-page content lives in the **`content/`** folder (typed TypeScript modules). See [`content/README.md`](content/README.md) for which file to open — company details, services, reviews, job references, page intros, nav, and inquiry form options are all there. No separate CMS or hunting through JSON for copy.
+
 ## GitHub Pages preview
 
 A static preview deploys from GitHub Actions to:
@@ -28,6 +32,6 @@ Copy `.env.example` to `.env.local` and set:
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — digits only, country code included (e.g. `447700900123`)
 - `NEXT_PUBLIC_MESSENGER_PAGE` — your Facebook Page username so `https://m.me/yourpage` works
 
-Replace placeholder phone, email, and sample job references in `lib/contact.ts` and `lib/data.ts`.
+Replace placeholder phone, email, and sample job references in `content/company.ts` and `content/jobs.ts`.
 
-Inquiry submissions are logged by `app/api/inquiry/route.ts`. Forum comments are stored in `data/comments.json` after the job reference is checked against `data/jobs.json`. Photos are saved under `public/uploads/comments`.
+Inquiry submissions are logged by `app/api/inquiry/route.ts`. Forum comments are stored in `data/comments.json` after the job reference is checked against `content/jobs.ts`. Photos are saved under `public/uploads/comments`.

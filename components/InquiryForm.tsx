@@ -1,37 +1,28 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import {
+  bathroomOptions,
+  bedroomOptions,
+  hotelRoomOptions,
+  inquiryCopy,
+  inquiryDefaults,
+  inquiryServices,
+  propertyTypes,
+  services,
+} from "@/content";
 import { inquiryWhatsappText, messengerUrl, whatsappUrl } from "@/lib/contact";
 import { withBase } from "@/lib/site";
 
-const services = [
-  "BnB / short-stay",
-  "Hotel / serviced rooms",
-  "Move-out / end of tenancy",
-  "Other",
-] as const;
-
-const propertyTypes = [
-  "Studio",
-  "Apartment / flat",
-  "House",
-  "Townhouse",
-  "Guest house / BnB",
-  "Hotel",
-  "Aparthotel",
-  "Other",
-] as const;
-
-const bedroomOptions = ["1", "2", "3", "4", "5", "6+"];
-const bathroomOptions = ["1", "2", "3", "4+"];
-const hotelRoomOptions = ["1–5", "6–10", "11–20", "21–50", "50+"];
-
-type Service = (typeof services)[number];
+type Service = (typeof inquiryServices)[number];
 type PropertyType = (typeof propertyTypes)[number];
+
+const hotelInquiryLabel =
+  services.find((s) => s.slug === "hotel")?.inquiryLabel ?? "Hotel / serviced rooms";
 
 function roomFieldsFor(service: Service, propertyType: PropertyType) {
   const isHotelLike =
-    service === "Hotel / serviced rooms" ||
+    service === hotelInquiryLabel ||
     propertyType === "Hotel" ||
     propertyType === "Aparthotel";
   const isStudio = propertyType === "Studio";
@@ -45,11 +36,19 @@ function roomFieldsFor(service: Service, propertyType: PropertyType) {
 export function InquiryForm() {
   const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [service, setService] = useState<Service>(services[0]);
-  const [propertyType, setPropertyType] = useState<PropertyType>(propertyTypes[1]);
-  const [bedrooms, setBedrooms] = useState("2");
-  const [bathrooms, setBathrooms] = useState("1");
-  const [roomCount, setRoomCount] = useState("1–5");
+  const [service, setService] = useState<Service>(inquiryServices[0]);
+  const [propertyType, setPropertyType] = useState<PropertyType>(
+    propertyTypes[inquiryDefaults.propertyTypeIndex],
+  );
+  const [bedrooms, setBedrooms] = useState<(typeof bedroomOptions)[number]>(
+    inquiryDefaults.bedrooms,
+  );
+  const [bathrooms, setBathrooms] = useState<(typeof bathroomOptions)[number]>(
+    inquiryDefaults.bathrooms,
+  );
+  const [roomCount, setRoomCount] = useState<(typeof hotelRoomOptions)[number]>(
+    inquiryDefaults.roomCount,
+  );
 
   const { showBedrooms, showBathrooms, showHotelRooms } = useMemo(
     () => roomFieldsFor(service, propertyType),
@@ -57,11 +56,11 @@ export function InquiryForm() {
   );
 
   function resetSelections() {
-    setService(services[0]);
-    setPropertyType(propertyTypes[1]);
-    setBedrooms("2");
-    setBathrooms("1");
-    setRoomCount("1–5");
+    setService(inquiryServices[0]);
+    setPropertyType(propertyTypes[inquiryDefaults.propertyTypeIndex]);
+    setBedrooms(inquiryDefaults.bedrooms);
+    setBathrooms(inquiryDefaults.bathrooms);
+    setRoomCount(inquiryDefaults.roomCount);
   }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -77,12 +76,12 @@ export function InquiryForm() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("ok");
-      setMessage("Inquiry received. Open WhatsApp or Messenger below to talk to a coordinator now.");
+      setMessage(inquiryCopy.success);
       form.reset();
       resetSelections();
     } catch {
       setStatus("error");
-      setMessage("Could not save the inquiry. You can still message us on WhatsApp or Messenger.");
+      setMessage(inquiryCopy.error);
     }
   }
 
@@ -109,7 +108,7 @@ export function InquiryForm() {
             value={service}
             onChange={(e) => setService(e.target.value as Service)}
           >
-            {services.map((s) => (
+            {inquiryServices.map((s) => (
               <option key={s}>{s}</option>
             ))}
           </select>
@@ -138,7 +137,7 @@ export function InquiryForm() {
               name="bedrooms"
               className="field"
               value={bedrooms}
-              onChange={(e) => setBedrooms(e.target.value)}
+              onChange={(e) => setBedrooms(e.target.value as (typeof bedroomOptions)[number])}
             >
               {bedroomOptions.map((n) => (
                 <option key={n} value={n}>
@@ -155,7 +154,7 @@ export function InquiryForm() {
               name="bathrooms"
               className="field"
               value={bathrooms}
-              onChange={(e) => setBathrooms(e.target.value)}
+              onChange={(e) => setBathrooms(e.target.value as (typeof bathroomOptions)[number])}
             >
               {bathroomOptions.map((n) => (
                 <option key={n} value={n}>
@@ -172,7 +171,7 @@ export function InquiryForm() {
               name="roomCount"
               className="field"
               value={roomCount}
-              onChange={(e) => setRoomCount(e.target.value)}
+              onChange={(e) => setRoomCount(e.target.value as (typeof hotelRoomOptions)[number])}
             >
               {hotelRoomOptions.map((n) => (
                 <option key={n} value={n}>
@@ -193,12 +192,12 @@ export function InquiryForm() {
           name="details"
           rows={5}
           className="field"
-          placeholder="Checkout time, linen, access instructions…"
+          placeholder={inquiryCopy.detailsPlaceholder}
         />
       </label>
       <div className="flex flex-wrap gap-3">
         <button type="submit" className="btn-primary">
-          Send inquiry
+          {inquiryCopy.submitLabel}
         </button>
         <a
           className="btn-ghost"
@@ -215,10 +214,10 @@ export function InquiryForm() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          WhatsApp instead
+          {inquiryCopy.whatsappInstead}
         </a>
         <a className="btn-ghost" href={messengerUrl()} target="_blank" rel="noopener noreferrer">
-          Messenger
+          {inquiryCopy.messenger}
         </a>
       </div>
       {status !== "idle" ? (
