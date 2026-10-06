@@ -1,11 +1,6 @@
-export const company = {
-  name: "Sparkle Stay Clean",
-  tagline: "Guest-ready stays. Move-out ready homes.",
-  phoneDisplay: "+44 7700 900123",
-  email: "hello@sparklestayclean.example",
-  hours: "Mon–Sat, 7:00–19:00",
-  area: "Hotels, BnBs, and homes across the city",
-};
+import { company } from "@/content/company";
+
+export { company };
 
 /** WhatsApp in international format, digits only. Replace with your real number. */
 export const whatsappNumber =

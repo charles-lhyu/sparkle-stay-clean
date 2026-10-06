@@ -2,14 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { company } from "@/lib/contact";
-
-const links = [
-  { href: "/services", label: "Services" },
-  { href: "/jobs", label: "Job references" },
-  { href: "/reviews", label: "Reviews" },
-  { href: "/forum", label: "Host forum" },
-];
+import { bookCta, company, navLinks } from "@/content";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -23,13 +16,13 @@ export function Header() {
           </span>
         </Link>
         <nav className="hidden items-center gap-7 text-sm text-[var(--muted)] md:flex">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-[var(--ink)]">
               {l.label}
             </Link>
           ))}
-          <Link href="/inquiry" className="btn-primary !py-2 !px-4 text-sm">
-            Book a clean
+          <Link href={bookCta.href} className="btn-primary !py-2 !px-4 text-sm">
+            {bookCta.label}
           </Link>
         </nav>
         <button
@@ -43,7 +36,7 @@ export function Header() {
       </div>
       {open ? (
         <nav className="flex flex-col gap-3 border-t border-[var(--line)] px-4 py-4 text-sm md:hidden">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
@@ -53,8 +46,12 @@ export function Header() {
               {l.label}
             </Link>
           ))}
-          <Link href="/inquiry" onClick={() => setOpen(false)} className="btn-primary w-fit text-sm">
-            Book a clean
+          <Link
+            href={bookCta.href}
+            onClick={() => setOpen(false)}
+            className="btn-primary w-fit text-sm"
+          >
+            {bookCta.label}
           </Link>
         </nav>
       ) : null}

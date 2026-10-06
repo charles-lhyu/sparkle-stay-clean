@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { company, messengerUrl, whatsappUrl } from "@/lib/contact";
+import { company } from "@/content";
+import { messengerUrl, whatsappUrl } from "@/lib/contact";
 
 export function Footer() {
   return (

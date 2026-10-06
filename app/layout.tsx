@@ -3,7 +3,7 @@ import { Fraunces, Outfit } from "next/font/google";
 import { ChatWidget } from "@/components/ChatWidget";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { company } from "@/lib/contact";
+import { company, siteDescription } from "@/content";
 import "./globals.css";
 
 const display = Fraunces({
@@ -21,8 +21,7 @@ export const metadata: Metadata = {
     default: `${company.name} — BnB, hotel & move-out cleaning`,
     template: `%s · ${company.name}`,
   },
-  description:
-    "Professional turnover cleaning for BnBs and hotels, plus inventory-ready move-out cleans. Book online or chat on WhatsApp and Messenger.",
+  description: siteDescription,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
